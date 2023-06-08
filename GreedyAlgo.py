@@ -1,5 +1,5 @@
 import pandas as pd
-dataset=pd.read_csv("C:\\Users\\vicky\\OneDrive\\Desktop\\Project_4th_sem\\RoomHive\\hotels_list.csv")
+dataset=pd.read_csv("C:\\Users\\vijay\\OneDrive - SSN Trust\\Desktop\\Project 4\\RoomHive\\GreedyAlgo.py")
 List=[]
 s1=4000
 s2=5000
