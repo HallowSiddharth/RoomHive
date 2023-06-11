@@ -39,12 +39,12 @@ header {
 }
 
 
-.login-grid {
+.search-grid {
     display: grid;
-    grid-template-columns: 1fr 400px 1fr;
+    grid-template-columns: 1fr 700px 1fr;
 }
 
-.login-grid-center {
+.search-grid-center {
     position: relative;
     top: 100%;
 }
@@ -56,8 +56,8 @@ header {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 100%;
-    margin-bottom: 20px;
+    width: 75%;
+    margin-bottom: 30px;
 }
 
 .username-input {
@@ -74,25 +74,25 @@ header {
 }
 
 .input-text {
-    display: block;
-    margin-left: auto;
+    display: inline-block;
+    margin-left: 30px;
     margin-right: auto;
-    width: 100%;
-    margin-top: 15px;
+    width: 90%;
+    margin-top: 5px;
     padding-top: 8px;
     padding-bottom: 8px;
     padding-left: 15px;
     border-radius: 20px;
     border-style: none;
     font-size: 18px;
+    justify-content: left;
 }
 
 .otp-button {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 30px;
-    font-size: 18px;
+    display: inline-block;
+    margin-left: -60px;
+    /* margin-top: 30px;
+    font-size: 18px; */
     font-family: "Roboto";
     background-color: #61FF70;
     border: none;
@@ -101,7 +101,7 @@ header {
     padding-bottom: 10px;
     padding-left: 20px;
     padding-right: 20px;
-    border-radius: 30px;
+    border-radius: 20px;
 }
 
 .otp-button:hover {
@@ -133,7 +133,7 @@ header {
     font-size: 18px;
 }
 
-.login-container {
+.search-container {
     margin-top: 25%;
     display: block;
     font-size: 18px;
@@ -146,7 +146,7 @@ header {
 }
 
 .linktext,
-.login-text {
+.search-text {
     color: #61FF70;
     text-decoration: none;
 }
@@ -155,7 +155,7 @@ header {
 
     position: absolute;
     top: 50%;
-    left: 25%;
+    left: 17%;
 }
 
 .polygon4 {
@@ -208,4 +208,34 @@ header {
     color: white;
     font-size: 24px;
     text-align: center;
+}
+
+.search-form {
+    margin-top: 20px;
+}
+
+.options-grid {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.column-1-options {
+    margin-left: 200px;
+}
+.option-labels {
+    display: block;
+    color:#FFF;
+    margin-top: 10px;
+}
+
+.options {
+    display:block;
+    padding-right:10px;
+    border: none;
+    padding-top: 6px;
+    font-size: 16px;
+    width: 100px;
+    padding-bottom: 6px;
+    border-radius: 6px;
 }
