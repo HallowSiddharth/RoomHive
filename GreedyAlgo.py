@@ -1,5 +1,5 @@
 import pandas as pd
-df=pd.read_csv("C:\\Users\\vicky\\OneDrive\\Desktop\\Project_4th_sem\\RoomHive\\hotels_list.csv")
+df=pd.read_csv("C:\\Users\\3122215002122\\Documents\\GitHub\\RoomHive\\hotels_list.csv")
 try:
   if df.isna().sum().sum() != 0:
     df = df.dropna()
