@@ -1,14 +1,5 @@
 import pandas as pd
-dataset=pd.read_csv("C:\Users\vicky\OneDrive\Desktop\Project_4th_sem\RoomHive\hotels_list.csv")
-List=[]
-s1=4000
-s2=5000
-ac="yes"
-f="yes"
-o=3
-for i in range(0,len(dataset)):
-    s=dataset['Name'].values[i]+dataset['Address'].values[i]
-df=pd.read_csv("C:\\Users\\3122215002122\\Documents\\GitHub\\RoomHive\\hotels_list.csv")
+df=pd.read_csv("C:\\Users\\vicky\\OneDrive\\Desktop\\Project_4th_sem\\RoomHive\\hotels_list.csv")
 try:
   if df.isna().sum().sum() != 0:
     df = df.dropna()
