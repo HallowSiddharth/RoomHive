@@ -1,5 +1,5 @@
 import pandas as pd
-dataset=pd.read_csv("C:\\Users\\vijay\\OneDrive - SSN Trust\\Desktop\\Project 4\\RoomHive\\GreedyAlgo.py")
+dataset=pd.read_csv("C:\Users\vicky\OneDrive\Desktop\Project_4th_sem\RoomHive\hotels_list.csv")
 List=[]
 s1=4000
 s2=5000
@@ -8,6 +8,71 @@ f="yes"
 o=3
 for i in range(0,len(dataset)):
     s=dataset['Name'].values[i]+dataset['Address'].values[i]
+df=pd.read_csv("C:\\Users\\3122215002122\\Documents\\GitHub\\RoomHive\\hotels_list.csv")
+try:
+  if df.isna().sum().sum() != 0:
+    df = df.dropna()
+except:
+  print("Something went wrong when checking for null values")
+
+df['Occupancy'] = df['Occupancy'].astype(int)
+
+f = 'yes'
+ac = 'yes'
+o = 2
+s1 = 1000
+s2 = 4000
+condition = (df['Food'] == f) & (df['AC'] == ac) & (df['Occupancy'] >=o) & (df['Price'] <= s2) & (df['Price']>=s1)
+result = df[condition]
+not_result = df[~condition]
+condition1=(not_result['Price'] <= s2) & (not_result['Price'] >= s1)
+result1=not_result[condition1]
+not_result1=not_result[~condition1]
+List1=[]
+List2=[]
+List3=[]
+for i in range(0,len(result)):
+    s=result['Name'].values[i]+result['Address'].values[i]
+    wei=1
+    profit=result['Price'].values[i]
+    if result['Price'].values[i]>s1 and result['Price'].values[i]<s2:
+        wei+=1
+    if result['AC'].values[i]==ac:
+        wei+=1
+    if result['Food'].values[i]==f:
+        wei+=1
+    if result['Occupancy'].values[i]==o:
+        wei+=1
+    if result['AC'].values[i]=="yes":
+        profit+=1
+    if result['Food'].values[i]=="yes":
+        profit+=1
+    if result['Occupancy'].values[i]=="yes":
+        profit+=1
+    lis=[wei,profit,s]
+    List1.append(lis)
+for i in range(0,len(result1)):
+    s=result1['Name'].values[i]+result1['Address'].values[i]
+    wei=1
+    profit=result1['Price'].values[i]
+    if result1['Price'].values[i]>s1 and result1['Price'].values[i]<s2:
+        wei+=1
+    if result1['AC'].values[i]==ac:
+        wei+=1
+    if result1['Food'].values[i]==f:
+        wei+=1
+    if result1['Occupancy'].values[i]==o:
+        wei+=1
+    if result1['AC'].values[i]=="yes":
+        profit+=1
+    if result1['Food'].values[i]=="yes":
+        profit+=1
+    if result1['Occupancy'].values[i]=="yes":
+        profit+=1
+    lis=[wei,profit,s]
+    List2.append(lis)
+for i in range(0,len(not_result1)):
+    s=not_result1['Name'].values[i]+not_result1['Address'].values[i]
     wei=1
     profit=not_result1['Price'].values[i]
     if not_result1['Price'].values[i]>s1 and not_result1['Price'].values[i]<s2:
