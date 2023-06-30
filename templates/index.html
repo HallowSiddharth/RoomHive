@@ -6,7 +6,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RoomHive</title>
-    <link rel="icon" type="image/x-icon" href="static/assets/icon.png">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#submit-btn').click(function (e) {
+                e.preventDefault(); // Prevent the form from submitting normally
+                var password = $('#password').val();
+                var username = $('#username').val();
+                // var next_url = $('#next').val();
+                // Create a data object with the input values
+                var data = {
+                    password: password,
+                    username: username,
+
+                };
+
+                // Send the data to the Python script
+                $.ajax({
+                    type: 'POST',
+                    url: '/submit',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    success: function (response) {
+                        console.log('Data submitted successfully!');
+                        window.location.href = '/submit';
+                    },
+                    error: function (error) {
+                        console.error('Error submitting data:', error);
+                    }
+                });
+            });
+        });
+    </script>
+    <link rel="icon" type="image/x-icon" href="{{url_for('static',filename='assets/icon.png')}}">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +47,7 @@
         rel="stylesheet">
 
     <!-- CSS File-->
-    <link rel="stylesheet" href="static/css/main.css">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}">
 </head>
 
 <body>
@@ -26,87 +58,46 @@
             <div class="login-grid-left"></div>
             <div class="login-grid-center">
                 <div class="login-grid-items">
-                    <img class="logo" src="static/assets/RoomHive.svg">
-                    <input type="text" class="username-input" placeholder="username">
-                    <input type="password" class="password-input" placeholder="password">
-                    <button class="login-button">Login</button>
-                    <div class="forgotpass-register-grid">
-                        <div class="forgot-pass-container">
-                            <a href="{{url_for('forget')}}"><button> Forgot Password</button></a>
-                            <!-- <a href="forgotpassword.html" class="forgot-pass-text" href="">
-                                Forgot Password
-                            </a>   -->
-                        
-                        
-                        </div>
-                        <div class="ortext">
-                            <p>OR</p>
-                        </div>
-                        <div class="register-container">
-                            <a class="linktext" href="">Register</a>
-                        </div>
+                    <img class="logo" src="{{url_for('static', filename='assets/RoomHive.svg')}}">
+                    <form class="search-form" action="{{url_for('submit')}}" method="post">
+                        <input name="username" id="username" type="text" class="username-input" placeholder="username">
+                        <input name="password" id="password" type="password" class="password-input"
+                            placeholder="password">
+                        <button id="submit-btn" class="login-button">Login</button>
 
-                    </div>
+                        <div class="forgotpass-register-grid">
+                            <div class="forgot-pass-container">
+                                <a href="{{url_for('forget')}}" class="forgot-pass-text" >
+                                    Forgot Password
+                                </a>
+                            </div>
+                            <div class="ortext">
+                                <p>OR</p>
+                            </div>
+                            <div class="register-container">
+                                <a href="{{url_for('registerr')}}" class="linktext" >Register</a>
+                            </div>
+                    </form>
+                    {% with messages = get_flashed_messages() %}
+                    {% for message in messages %}
+                    <p> {{ message }}</p>
+                    {% endfor %}
+                    {% endwith %}
+
+
                 </div>
             </div>
-            <div class="login-grid-right"></div>
-
+        </div>
+        <div class="login-grid-right"></div>
         </div>
 
-        <img class="ellipse1" src="static/assets/Ellipse 1.svg">
-        <img class="ellipse2" src="static/assets/Ellipse 2.svg">
-        <img class="ellipse3" src="static/assets/Ellipse 3.svg">
-        <img class="polygon1" src="static/assets/Polygon 1.svg">
-        <img class="polygon2" src="static/assets/Polygon 2.svg">
-        <img class="polygon3" src="static/assets/Polygon 3.svg">
-        <img class="polygon4" src="static/assets/Polygon 4.svg">
-
-        <script>
-            var loginButton = document.querySelector('.login-button');
-            loginButton.addEventListener('click', validateLogin);
-        
-            function validateLogin(event) {
-                event.preventDefault();
-        
-                var usernameInput = document.querySelector('.username-input');
-                var passwordInput = document.querySelector('.password-input');
-                var username = usernameInput.value;
-                var password = passwordInput.value;
-        
-                // Perform validation
-                if (username === '') {
-                    alert('Please enter a username.');
-                } else if (password === '') {
-                    alert('Please enter a password.');
-                } else {
-                    // Read and validate username and password from CSV file
-                    var fileUpload = document.getElementById("fileUpload");
-                    var file = fileUpload.files[0];
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        var csvData = e.target.result;
-                        var rows = csvData.split("\n");
-                        var validCredentials = false;
-                        for (var i = 0; i < rows.length; i++) {
-                            var cells = rows[i].split(",");
-                            var csvUsername = cells[0];
-                            var csvPassword = cells[1];
-                            if (csvUsername.trim() === username && csvPassword.trim() === password) {
-                                validCredentials = true;
-                                break;
-                            }
-                        }
-                        if (validCredentials) {
-                            window.location.href = 'searchhome.html';
-                        } else {
-                            alert('Invalid username or password.');
-                        }
-                    };
-                    reader.readAsText(file);
-                }
-            }
-        </script>
-        
+        <img class="ellipse1" src="{{url_for('static', filename='assets/Ellipse 1.svg')}}">
+        <img class="ellipse2" src="{{url_for('static', filename='assets/Ellipse 2.svg')}}">
+        <img class="ellipse3" src="{{url_for('static', filename='assets/Ellipse 3.svg')}}">
+        <img class="polygon1" src="{{url_for('static', filename='assets/Polygon 1.svg')}}">
+        <img class="polygon2" src="{{url_for('static', filename='assets/Polygon 2.svg')}}">
+        <img class="polygon3" src="{{url_for('static', filename='assets/Polygon 3.svg')}}">
+        <img class="polygon4" src="{{url_for('static', filename='assets/Polygon 4.svg')}}">
 
     </main>
 

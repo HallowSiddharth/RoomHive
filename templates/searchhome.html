@@ -6,8 +6,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RoomHive</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#submit-btn').click(function(e) {
+                e.preventDefault(); // Prevent the form from submitting normally
+                var clgname = $('#clgname').val();
+                var a = document.getElementById("foodo")
+                var foodo = a.value
+                var b = document.getElementById("rangeo")
+                var rangeo = b.value
+                var c = document.getElementById("occ")
+                var occ = c.value
+                var d = document.getElementById("aco")
+                var aco = d.value
+        
+                // Create a data object with the input values
+                var data = {
+                    clgname: clgname,
+                    foodo: foodo,
+                    occ: occ,
+                    aco: aco,
+                    rangeo: rangeo,
+                };
+                $.ajax({
+                    url: "/sub", // Replace with the correct URL or endpoint to handle the form submission
+                    method: "POST", // Replace with the appropriate HTTP method
+                    data: data,
+                    success: function(response) {
+                        // Handle the response or redirect the user to the desired location
+                        window.location.href = "/sub"; // Replace with the correct URL or action
+                    },
+                    error: function(error) {
+                        // Handle any errors that occur during the AJAX request
+                        console.log(error);
+
+<!--                window.location.href = "sub";-->
+                });
+            });
+    </script>
+</head>
     <!-- Fonts -->
-    <link rel="icon" type="image/x-icon" href="assets/icon.png">
+    <link rel="icon" type="image/x-icon" href="{{url_for('static',filename='assets/icon.png')}}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -15,7 +55,7 @@
         rel="stylesheet">
 
     <!-- CSS File-->
-    <link rel="stylesheet" href="css/searchhome.css">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/searchhome.css')}}">
 </head>
 
 <body>
@@ -27,22 +67,21 @@
             <div class="search-grid-left"></div>
             <div class="search-grid-center">
                 <div class="search-grid-items">
-                    <img class="logo" src="assets/RoomHive.svg">
-                    <form class="search-form">
-                        <input type="text" class="input-text" placeholder="Enter a College Location">
-                        <button class="otp-button">&#128269;</button>    
-                    </form>
+                    <img class="logo" src="{{url_for('static', filename='assets/RoomHive.svg')}}">
+                    <form class="search-form" action="{{url_for('sub')}}" method="post">
+                        <input type="text" id="clgname" name="clgname" class="input-text" placeholder="Enter a College Location" required>
+                        <!--<button id="submit-btn" class="otp-button">&#128269;</button>-->
         
                 </div>
                 <div class="options-grid">
                     <div class="column-1-options">
-                        <label for="food" class="option-labels">Food</label>
-                        <select name="food" id="food" class="options">
+                        <label for="foodo" class="option-labels">Food</label>
+                        <select name="foodo" id="foodo" class="options">
                             <option value="included">Included</option>
                             <option value="not-included">Not Included</option>
                         </select>
-                        <label for="price" class="option-labels">Price</label>
-                        <select name="price" id="price" class="options">
+                        <label for="rangeo" class="option-labels">Price</label>
+                        <select name="rangeo" id="rangeo" class="options">
                             <option value="1k-2k">₹1k - ₹2k</option>
                             <option value="2k-3k">₹2k - ₹3k</option>
                             <option value="3k-4k">₹3k - ₹4k</option>
@@ -52,32 +91,35 @@
                         </select>
                     </div>
                     <div class="column-2-options">
-                        <label for="occupancy" class="option-labels">Occupancy</label>
-                        <select name="occupancy" id="occupancy" class="options">
+                        <label for="occ" class="option-labels">Occupancy</label>
+                        <select name="occ" id="occ" class="options">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
                         </select>
-                        <label for="ac" class="option-labels">AC</label>
-                        <select name="ac" id="ac" class="options">
+                        <label for="aco" class="option-labels">AC</label>
+                        <select name="aco" id="aco" class="options">
                             <option value="ac">AC</option>
                             <option value="non-ac">Non-AC</option>
                         </select>
+                      <button id="submit-btn" class="otp-button">&#128269;</button>
+                    </form>
                     </div>
                 </div>
             </div>
 
             <div class="search-grid-right"></div>
 
+
         </div>
 
-        <img class="ellipse1" src="assets/Ellipse 1.svg">
-        <img class="ellipse2" src="assets/Ellipse 2.svg">
-        <img class="ellipse3" src="assets/Ellipse 3.svg">
-        <img class="polygon1" src="assets/Polygon 1.svg">
-        <img class="polygon2" src="assets/Polygon 2.svg">
-        <img class="polygon3" src="assets/Polygon 3.svg">
-        <img class="polygon4" src="assets/Polygon 4.svg">
+        <img class="ellipse1" src="{{url_for('static', filename='assets/Ellipse 1.svg')}}">
+        <img class="ellipse2" src="{{url_for('static', filename='assets/Ellipse 2.svg')}}">
+        <img class="ellipse3" src="{{url_for('static', filename='assets/Ellipse 3.svg')}}">
+        <img class="polygon1" src="{{url_for('static', filename='assets/Polygon 1.svg')}}">
+        <img class="polygon2" src="{{url_for('static', filename='assets/Polygon 2.svg')}}">
+        <img class="polygon3" src="{{url_for('static', filename='assets/Polygon 3.svg')}}">
+        <img class="polygon4" src="{{url_for('static', filename='assets/polygon 4.svg')}}">
 
     </main>
 

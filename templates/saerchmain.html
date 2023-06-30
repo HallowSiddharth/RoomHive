@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoomHive</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#submit-btn').click(function(e) {
+                e.preventDefault(); // Prevent the form from submitting normally
+                var clgname = $('#clgname').val();
+                var a = document.getElementById("foodo");
+                var foodo = a.value;
+                var b = document.getElementById("rangeo");
+                var rangeo = b.value;
+                var c = document.getElementById("occ");
+                var occ = '2';
+                var d = document.getElementById("aco");
+                var aco = d.value;
+
+                // Create a data object with the input values
+                var data = {
+    clgname: clgname,
+    foodo: foodo,
+    occ: occ,
+    aco: aco,
+    rangeo: rangeo,
+};
+
+$.ajax({
+    url: "/sub",
+    method: "POST",
+    data: data,
+    success: function(response) {
+        console.log(response); // Log the response for debugging
+
+        // Example: Update a specific element on the page with the response data
+        $('#result-container').html(response);
+
+        // If you want to redirect the user to a different URL, replace the line above
+        // with the following:
+        // window.location.href = "/new-page";
+    },
+    error: function(error) {
+        // Handle any errors that occur during the AJAX request
+        console.log(error);
+    }
+});
+
+    </script>
+    <link rel="icon" type="image/x-icon" href="{{url_for('static',filename='assets/icon.png')}}">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS File-->
+    <link rel="stylesheet" href="{{url_for('static',filename='css/searchmain.css')}}">
+</head>
+
+<body>
+
+    <main class="main main--room">
+        <div class="top-navbar">
+            <div class="roomhivelogo">
+                <img class="logo" src="{{url_for('static', filename='assets/RoomHive.svg')}}" alt="roomhive logo">
+            </div>
+            <div class="searchbox">
+                <form class="search-form" action="{{url_for('sub')}}" method="post">
+                    <input type="text" id="clgname" name="clgname" class="input-text" placeholder="Enter a College Location">
+                    <!-- <button class="search-button">&#128269;</button>-->
+                
+            </div>
+        </div>
+
+        <div class="content-remaining">
+            <div class="filters">
+                <label for="foodo" class="option-labels">Food</label>
+                <select name="foodo" id="foodo" class="options">
+                    <option value="included">Included</option>
+                    <option value="not-included">Not Included</option>
+                </select>
+                <label for="rangeo" class="option-labels">Price</label>
+                <select name="rangeo" id="rangeo" class="options">
+                    <option value="1k-2k">₹1k - ₹2k</option>
+                    <option value="2k-3k">₹2k - ₹3k</option>
+                    <option value="3k-4k">₹3k - ₹4k</option>
+                    <option value="4k-5k">₹4k - ₹5k</option>
+                    <option value="5k-6k">₹5k - ₹6k</option>
+                </select>
+                <label for="occ" class="option-labels">Occupancy</label>
+                <select name="occ" id="occ" class="options">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+                <label for="aco" class="option-labels">AC</label>
+                <select name="aco" id="aco" class="options">
+                    <option value="ac">AC</option>
+                    <option value="non-ac">Non-AC</option>
+                </select>
+                <button id="submit-btn" class="apply-filters">Apply Filters</button>
+            </form>
+            </div>
+            <!-- result 1 -->
+            <div class="results">
+                <div class="result">
+                    <div class="result-layout">
+                        <div class="image">
+                            <img class="result-images"
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJgcgbzOsdhi7EI66mHguYww_2ehxo64gEB2MI735JOT56MHQqNXOZphok9MmnNXcAxBE&usqp=CAU"
+                                alt="hotel 1 image">
+                        </div>
+                        <div class="resulttext">
+                            <label class="hotel-names" for="hotel1-name">{{hot[0]['Name']}}</label>
+                            <label class="distance" for="distance-from-college">{{ hot[0]['Address'] }}</label>
+                            <div class="feature-grid">
+                                <div class="column-1-features">
+                                    <label class="feature-text" for="price">Price:Rs.{{hot[0]['Price']}}</label>
+                                    <label class="feature-text" for="Food">Food:{{hot[0]['Food']}}</label>
+                                </div>
+                                <div class="column-2-features">
+                                    <label class="feature-text" for="AC-Type">AC:{{hot[0]['AC']}}</label>
+                                    <label class="feature-text" for="Occupancy">Occupancy:{{hot[0]['Occupancy']}}</label>
+                                </div>
+                                <div class="get-location">
+                                    <button class="location-button" onclick="navigateToAddress('{{hot[0]['Name']}}'+' {{hot[0]['Address']}}')">
+                                        Get Location &#8594
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- result 2 -->
+                <div class="result">
+                    <div class="result-layout">
+                        <div class="image">
+                            <img class="result-images"
+                                src="https://static.dezeen.com/uploads/2022/03/granville1500-loha-architecture-usa_dezeen_sq1-411x411.jpg"
+                                alt="hotel 2 image">
+                        </div>
+                        <div class="resulttext">
+                            <label class="hotel-names" for="hotel2-name">{{ hot[1]['Name'] }}</label>
+                            <label class="distance" for="distance-from-college">{{ hot[1]['Address'] }}</label>
+                            <div class="feature-grid">
+                                <div class="column-1-features">
+                                    <label class="feature-text" for="price">Price:Rs.{{hot[1]['Price']}}</label>
+                                    <label class="feature-text" for="Food">Food:{{hot[1]['Food']}}</label>
+                                </div>
+                                <div class="column-2-features">
+                                    <label class="feature-text" for="AC-Type">AC:{{hot[1]['AC']}}</label>
+                                    <label class="feature-text" for="Occupancy">Occupancy:{{hot[1]['Occupancy']}}</label>
+                                </div>
+                                <div class="get-location">
+                                    <button class="location-button" onclick="navigateToAddress('{{hot[1]['Name']}}'+' {{hot[1]['Address']}}')">
+                                        Get Location &#8594
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- result 3 -->
+                <div class="result">
+                    <div class="result-layout">
+                        <div class="image">
+                            <img class="result-images"
+                                src="{{url_for('static', filename='assets/img3.png')}}"
+                                alt="hotel 3 image">
+                        </div>
+                        <div class="resulttext">
+                            <label class="hotel-names" for="hotel1-name">{{ hot[2]['Name'] }}</label>
+                            <label class="distance" for="distance-from-college">{{ hot[2]['Address'] }}</label>
+                            <div class="feature-grid">
+                                <div class="column-1-features">
+                                    <label class="feature-text" for="price">Price:Rs.{{hot[2]['Price']}}</label>
+                                    <label class="feature-text" for="Food">Food:{{hot[2]['Food']}}</label>
+                                </div>
+                                <div class="column-2-features">
+                                    <label class="feature-text" for="AC-Type">AC:{{hot[2]['AC']}}</label>
+                                    <label class="feature-text" for="Occupancy">Occupancy:{{hot[2]['Occupancy']}}</label>
+                                </div>
+                                <div class="get-location">
+                                    <button class="location-button" onclick="navigateToAddress('{{hot[2]['Name']}}'+' {{hot[2]['Address']}}')">
+                                        Get Location &#8594
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="section-header">
+                    <label class="sec-header" for="section-header">Other Results That May Help you</label>
+                </div>
+                <!-- result 4 -->
+                <div class="result">
+                    <div class="result-layout">
+                        <div class="image">
+                            <img class="result-images"
+                                src="https://www.go.study/assets/usa/student-accommodation-in-usa.jpg"
+                                alt="hotel 4 image">
+                        </div>
+                        <div class="resulttext">
+                            <label class="hotel-names" for="hotel1-name">{{ hot[3]['Name'] }}</label>
+                            <label class="distance" for="distance-from-college">{{ hot[3]['Address'] }}</label>
+                            <div class="feature-grid">
+                                <div class="column-1-features">
+                                    <label class="feature-text" for="price">Price:Rs.{{hot[3]['Price']}}</label>
+                                    <label class="feature-text" for="Food">Food:{{hot[3]['Food']}}</label>
+                                </div>
+                                <div class="column-2-features">
+                                    <label class="feature-text" for="AC-Type">AC:{{hot[3]['AC']}}</label>
+                                    <label class="feature-text" for="Occupancy">Occupancy:{{hot[3]['Occupancy']}}</label>
+                                </div>
+                                <div class="get-location">
+                                    <button class="location-button" onclick="navigateToAddress('{{hot[3]['Name']}}'+' {{hot[3]['Address']}}')">
+                                        Get Location &#8594
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- result 5 -->
+                <div class="result">
+                    <div class="result-layout">
+                        <div class="image">
+                            <img class="result-images"
+                                src="https://media-cdn.tripadvisor.com/media/photo-s/1a/9d/dc/d9/the-student-hotel-the.jpg"
+                                alt="hotel 5 image">
+                        </div>
+                        <div class="resulttext">
+                            <label class="hotel-names" for="hotel1-name">{{ hot[4]['Name'] }}</label>
+                            <label class="distance" for="distance-from-college">{{ hot[4]['Address'] }}</label>
+                            <div class="feature-grid">
+                                <div class="column-1-features">
+                                    <label class="feature-text" for="price">Prics:Rs.{{hot[4]['Price']}}</label>
+                                    <label class="feature-text" for="Food">Food:{{hot[4]['Food']}}</label>
+                                </div>
+                                <div class="column-2-features">
+                                    <label class="feature-text" for="AC-Type">AC: {{hot[4]['AC']}}</label>
+                                    <label class="feature-text" for="Occupancy">Occupancy{{hot[4]['Occupancy']}}</label>
+                                </div>
+                                <div class="get-location">
+                                    <button class="location-button" onclick="navigateToAddress('{{hot[4]['Name']}}'+' {{hot[4]['Address']}}')">
+                                        Get Location &#8594
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="summa-div">
+                    <form action="{{url_for('telegram2')}}" method="POST">
+                    <button class="telegram-connect">Send To Telegram</button>
+                </form>
+                </div>
+            </div>
+
+
+        </div>
+        <img class="ellipse1" src="{{url_for('static', filename='assets/Ellipse 1.svg')}}">
+        <img class="polygon1" src="{{url_for('static', filename='assets/Polygon 1.svg')}}">
+    </main>
+
+    <script>
+        function navigateToAddress(hotelName) {
+            var formattedAddress = hotelName.replace(/ /g, '+');
+            var url = "https://www.google.com/maps/search/?api=1&query=" + formattedAddress;
+            window.open(url);
+        }
+
+        document.addEventListener('click', function (event) {
+            if (event.target.classList.contains('location-button')) {
+                var hotelName = event.target.closest('.result').querySelector('.hotel-names').textContent;
+                navigateToAddress(hotelName);
+            }
+        });
+    </script>
+
+</body>
+
+</html>

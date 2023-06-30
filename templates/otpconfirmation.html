@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RoomHive</title>
-    <link rel="icon" type="image/x-icon" href="assets/icon.png">
+    <link rel="icon" type="image/x-icon" href="static/assets/icon.png">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,7 @@
         rel="stylesheet">
 
     <!-- CSS File-->
-    <link rel="stylesheet" href="css/forgotpassword.css">
+    <link rel="stylesheet" href="static/css/forgotpassword.css">
 </head>
 
 <body>
@@ -26,10 +26,14 @@
             <div class="login-grid-left"></div>
             <div class="login-grid-center">
                 <div class="login-grid-items">
-                    <img class="logo" src="assets/RoomHive.svg">
+                    <img class="logo" src="static/assets/RoomHive.svg">
                     <p class="forgotpasstext">OTP Has Been Sent Via Telegram</p>
-                    <input type="text" class="input-text" placeholder="Enter OTP">
-                    <button class="otp-button">Confirm</button>
+                    <form action="{{ url_for('get_otp') }}" method="POST">
+                        <input type="text" class="input-text" placeholder="Enter OTP" name="otp">
+                        <button type="submit" class="otp-button">Confirm</button>
+                    </form>
+                    
+                      
                     <div class="forgotpass-register-grid">
                         <div class="login-container">
                             <a href="index.html" class="login-text" href="">
@@ -50,13 +54,13 @@
 
         </div>
 
-        <img class="ellipse1" src="assets/Ellipse 1.svg">
-        <img class="ellipse2" src="assets/Ellipse 2.svg">
-        <img class="ellipse3" src="assets/Ellipse 3.svg">
-        <img class="polygon1" src="assets/Polygon 1.svg">
-        <img class="polygon2" src="assets/Polygon 2.svg">
-        <img class="polygon3" src="assets/Polygon 3.svg">
-        <img class="polygon4" src="assets/Polygon 4.svg">
+        <img class="ellipse1" src="static/assets/Ellipse 1.svg">
+        <img class="ellipse2" src="static/assets/Ellipse 2.svg">
+        <img class="ellipse3" src="static/assets/Ellipse 3.svg">
+        <img class="polygon1" src="static/assets/Polygon 1.svg">
+        <img class="polygon2" src="static/assets/Polygon 2.svg">
+        <img class="polygon3" src="static/assets/Polygon 3.svg">
+        <img class="polygon4" src="static/assets/Polygon 4.svg">
 
     </main>
 

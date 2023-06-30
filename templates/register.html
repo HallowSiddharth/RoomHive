@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RoomHive</title>
-    <link rel="icon" type="image/x-icon" href="assets/icon.png">
+    <link rel="icon" type="image/x-icon" href="static/assets/icon.png">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,7 @@
         rel="stylesheet">
 
     <!-- CSS File-->
-    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="static/css/register.css">
 </head>
 
 <body>
@@ -26,14 +26,16 @@
             <div class="signup-grid-left"></div>
             <div class="signup-grid-center">
                 <div class="signup-grid-items">
-                    <img class="logo" src="assets/RoomHive.svg">
-                    <input type="text" class="username-input" placeholder="username">
-                    <input type="text" class="username-input" placeholder="telegram chat id">
-                    <input type="password" class="password-input" placeholder="password">
-                    <input type="password" class="password-input" placeholder="confirm password">
+                    <img class="logo" src="static/assets/RoomHive.svg">
+                    <form action="{{url_for('register')}}" method="POST">
+                    <input type="text" class="username-input" placeholder="username" name="username">
+                    <input type="text" class="username-input" placeholder="telegram chat id" name="telegram">
+                    <input type="password" class="password-input" placeholder="password" name="password">
+                    <input type="password" class="password-input" placeholder="confirm password" name="confirmpassword">
                     <button class="signup-button">Sign Up</button>
+                </form>
                     <p class="empty-paragraph"></p>
-                    <a href="index.html" class="login-text" href="">
+                    <a href="{{url_for('index')}}" class="login-text" href="">
                         Already a Member? Login
                     </a>
 
@@ -43,12 +45,12 @@
 
         </div>
 
-        <img class="ellipse1" src="assets/Ellipse 1.svg">
-        <img class="ellipse2" src="assets/Ellipse 2.svg">
-        <img class="ellipse3" src="assets/Ellipse 3.svg">
-        <img class="polygon2" src="assets/Polygon 2.svg">
-        <img class="polygon3" src="assets/Polygon 3.svg">
-        <img class="polygon4" src="assets/Polygon 4.svg">
+        <img class="ellipse1" src="static/assets/Ellipse 1.svg">
+        <img class="ellipse2" src="static/assets/Ellipse 2.svg">
+        <img class="ellipse3" src="static/assets/Ellipse 3.svg">
+        <img class="polygon2" src="static/assets/Polygon 2.svg">
+        <img class="polygon3" src="static/assets/Polygon 3.svg">
+        <img class="polygon4" src="static/assets/Polygon 4.svg">
 
     </main>
 
